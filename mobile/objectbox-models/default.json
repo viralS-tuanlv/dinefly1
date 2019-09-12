@@ -1,0 +1,646 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:3552886306618910690",
+      "lastPropertyId": "4:963990140532623677",
+      "name": "TerminalConfiguration",
+      "properties": [
+        {
+          "id": "1:9145428885579390406",
+          "name": "pk"
+        },
+        {
+          "id": "2:1762313806186290023",
+          "name": "configurationId"
+        },
+        {
+          "id": "3:8392465962300758175",
+          "name": "terminalType"
+        },
+        {
+          "id": "4:963990140532623677",
+          "name": "dateProvisioned"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:1543897486022881103",
+      "lastPropertyId": "7:6166456731723472466",
+      "name": "WaiterMenuCategory",
+      "properties": [
+        {
+          "id": "1:149126634755086631",
+          "name": "pk"
+        },
+        {
+          "id": "2:507966831964773934",
+          "name": "categoryId"
+        },
+        {
+          "id": "3:7432648955973658904",
+          "name": "name"
+        },
+        {
+          "id": "4:3559156107315479887",
+          "name": "weight"
+        },
+        {
+          "id": "5:2507356163891141073",
+          "name": "dineplanPicture"
+        },
+        {
+          "id": "6:1881246635110466935",
+          "name": "description"
+        },
+        {
+          "id": "7:6166456731723472466",
+          "name": "hidden"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:2324586206710539032",
+          "name": "menuItems"
+        },
+        {
+          "id": "2:4915503262485119246",
+          "name": "tagGroups"
+        }
+      ]
+    },
+    {
+      "id": "3:65793418696977269",
+      "lastPropertyId": "6:9041699152756343777",
+      "name": "WaiterOrderItemTag",
+      "properties": [
+        {
+          "id": "1:4626047674517839243",
+          "name": "id"
+        },
+        {
+          "id": "2:639018535316749313",
+          "name": "tagId"
+        },
+        {
+          "id": "3:293381124494001087",
+          "name": "groupId"
+        },
+        {
+          "id": "4:1763558320051751702",
+          "name": "amount"
+        },
+        {
+          "id": "5:6600504001485592923",
+          "name": "name"
+        },
+        {
+          "id": "6:9041699152756343777",
+          "name": "qty"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "4:7138233867416194210",
+      "lastPropertyId": "27:534380379670414681",
+      "name": "WaiterConfiguration",
+      "properties": [
+        {
+          "id": "1:6829507650376310824",
+          "name": "pk"
+        },
+        {
+          "id": "2:798415325396259031",
+          "name": "dineplanEndpoint"
+        },
+        {
+          "id": "3:4116766807785418233",
+          "name": "deviceId"
+        },
+        {
+          "id": "4:3786844164280440134",
+          "name": "userId"
+        },
+        {
+          "id": "5:6189603053993183696",
+          "name": "authenticated"
+        },
+        {
+          "id": "6:2393358876883831882",
+          "name": "userName"
+        },
+        {
+          "id": "7:2105261703758659199",
+          "name": "terminalName"
+        },
+        {
+          "id": "8:8307607235541584662",
+          "name": "terminalToken"
+        },
+        {
+          "id": "9:3391976732076228319",
+          "name": "salesOpen"
+        },
+        {
+          "id": "10:5052119867367318477",
+          "name": "currencySymbol"
+        },
+        {
+          "id": "11:1292900592564761328",
+          "name": "serviceInterval"
+        },
+        {
+          "id": "12:8307448846642144332",
+          "name": "uiInternal"
+        },
+        {
+          "id": "13:5426323092151535531",
+          "name": "printerAddress"
+        },
+        {
+          "id": "14:790138133675889559",
+          "name": "canPrintLocalKots"
+        },
+        {
+          "id": "15:3954462550632205521",
+          "name": "canPrintLocalBolls"
+        },
+        {
+          "id": "16:3457898543023793014",
+          "name": "printerPaperWidth"
+        },
+        {
+          "id": "17:3826486252984999049",
+          "name": "pax"
+        },
+        {
+          "id": "18:7448712526384598112",
+          "name": "waiter"
+        },
+        {
+          "id": "19:7319466353836312346",
+          "name": "departmentId"
+        },
+        {
+          "id": "20:3388337604223268776",
+          "name": "departmentName"
+        },
+        {
+          "id": "21:657689051475155165",
+          "name": "ticketingMethod"
+        },
+        {
+          "id": "22:8321152497641984418",
+          "name": "stopNewTicket"
+        },
+        {
+          "id": "23:6147068087772926757",
+          "name": "administrator"
+        },
+        {
+          "id": "24:252801522325254283",
+          "name": "authenticatedSecretHash"
+        },
+        {
+          "id": "25:8937968016049165946",
+          "name": "lastMenuSync"
+        },
+        {
+          "id": "26:2708216009052713710",
+          "name": "closingTag"
+        },
+        {
+          "id": "27:534380379670414681",
+          "name": "comboData"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "5:4725264232948961659",
+      "lastPropertyId": "3:6022379986022382814",
+      "name": "WaiterRoom",
+      "properties": [
+        {
+          "id": "1:5308022027404610193",
+          "name": "pk"
+        },
+        {
+          "id": "2:220990320555750957",
+          "name": "roomId"
+        },
+        {
+          "id": "3:6022379986022382814",
+          "name": "name"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "6:1903459029538548189",
+      "lastPropertyId": "11:2942825874746336983",
+      "name": "WaiterMenuItem",
+      "properties": [
+        {
+          "id": "1:8721929328689525841",
+          "name": "pk"
+        },
+        {
+          "id": "2:2931117497654885568",
+          "name": "itemId"
+        },
+        {
+          "id": "3:5798772819544843672",
+          "name": "categoryId"
+        },
+        {
+          "id": "4:1480441856541021024",
+          "name": "name"
+        },
+        {
+          "id": "5:5218936395716761018",
+          "name": "alias"
+        },
+        {
+          "id": "6:990821546743269851",
+          "name": "dineplanPictrue"
+        },
+        {
+          "id": "7:4738582937514359861",
+          "name": "description"
+        },
+        {
+          "id": "8:2145422593329571628",
+          "name": "subTag"
+        },
+        {
+          "id": "9:1607893544048469327",
+          "name": "favorite"
+        },
+        {
+          "id": "10:6332013567390447051",
+          "name": "weight"
+        },
+        {
+          "id": "11:2942825874746336983",
+          "name": "itemType"
+        }
+      ],
+      "relations": [
+        {
+          "id": "3:4868997901801580947",
+          "name": "portions"
+        },
+        {
+          "id": "4:5284982728267518327",
+          "name": "tagGroups"
+        }
+      ]
+    },
+    {
+      "id": "7:6806819257943716858",
+      "lastPropertyId": "5:8058858676706763809",
+      "name": "WaiterMenuItemTagGroup",
+      "properties": [
+        {
+          "id": "1:8964740271022989554",
+          "name": "pk"
+        },
+        {
+          "id": "2:2790686877550788175",
+          "name": "groupId"
+        },
+        {
+          "id": "3:4545173377296238572",
+          "name": "name"
+        },
+        {
+          "id": "4:720798078933734478",
+          "name": "minSelectableCount"
+        },
+        {
+          "id": "5:8058858676706763809",
+          "name": "maxSelectableCount"
+        }
+      ],
+      "relations": [
+        {
+          "id": "5:6240835071199847894",
+          "name": "tags"
+        }
+      ]
+    },
+    {
+      "id": "8:7035497878567474843",
+      "lastPropertyId": "4:1715079393737787598",
+      "name": "WaiterMenuItemPortion",
+      "properties": [
+        {
+          "id": "1:4495706923344712465",
+          "name": "pk"
+        },
+        {
+          "id": "2:5273757291032472301",
+          "name": "portionId"
+        },
+        {
+          "id": "3:4639516041613663259",
+          "name": "name"
+        },
+        {
+          "id": "4:1715079393737787598",
+          "name": "price"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "9:1569146990213867242",
+      "lastPropertyId": "5:3249570453431618906",
+      "name": "WaiterTable",
+      "properties": [
+        {
+          "id": "1:1435239868765521605",
+          "name": "pk"
+        },
+        {
+          "id": "2:7076549387894372531",
+          "name": "tableId"
+        },
+        {
+          "id": "3:7090679043780892622",
+          "name": "name"
+        },
+        {
+          "id": "4:8754644312537056420",
+          "name": "busy"
+        },
+        {
+          "id": "5:3249570453431618906",
+          "indexId": "1:4398682544208444444",
+          "name": "roomId"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "10:1674991288720747528",
+      "lastPropertyId": "15:1195162553693811157",
+      "name": "WaiterOrderComboItem",
+      "properties": [
+        {
+          "id": "1:1680574259141626365",
+          "name": "id"
+        },
+        {
+          "id": "2:7913731060084320562",
+          "indexId": "2:5867424811008087054",
+          "name": "dineplanOrderId"
+        },
+        {
+          "id": "3:5080698895718310004",
+          "name": "dateAdded"
+        },
+        {
+          "id": "4:2999666020124856525",
+          "name": "dateChanged"
+        },
+        {
+          "id": "5:5130900374129111986",
+          "name": "status"
+        },
+        {
+          "id": "6:30332522678573338",
+          "name": "name"
+        },
+        {
+          "id": "7:6160061662803520787",
+          "name": "qty"
+        },
+        {
+          "id": "8:4274599643053731021",
+          "name": "menuItemid"
+        },
+        {
+          "id": "9:47325939823116033",
+          "name": "portionId"
+        },
+        {
+          "id": "10:7276775570633479721",
+          "name": "potionAmount"
+        },
+        {
+          "id": "11:4985410946523629276",
+          "name": "finalPrice"
+        },
+        {
+          "id": "12:9175078183667816196",
+          "name": "voidOrder"
+        },
+        {
+          "id": "13:5240945424681178838",
+          "name": "giftOrder"
+        },
+        {
+          "id": "14:8728529952176034450",
+          "name": "notes"
+        },
+        {
+          "id": "15:1195162553693811157",
+          "indexId": "3:1518269983666326879",
+          "name": "comboId"
+        }
+      ],
+      "relations": [
+        {
+          "id": "6:7457696517457068369",
+          "name": "tags"
+        }
+      ]
+    },
+    {
+      "id": "11:3051450634691063109",
+      "lastPropertyId": "17:4270874605597882984",
+      "name": "WaiterOrderSaleItem",
+      "properties": [
+        {
+          "id": "1:4343308642165258482",
+          "name": "id"
+        },
+        {
+          "id": "2:7788214883206884618",
+          "indexId": "4:8940765661206729441",
+          "name": "dineplanOrderId"
+        },
+        {
+          "id": "3:1816854247162190798",
+          "name": "dateAdded"
+        },
+        {
+          "id": "4:1509296538396294358",
+          "name": "dateChanged"
+        },
+        {
+          "id": "5:6179922027417361473",
+          "name": "status"
+        },
+        {
+          "id": "6:5592861193525669215",
+          "name": "name"
+        },
+        {
+          "id": "7:2004113553871971762",
+          "name": "qty"
+        },
+        {
+          "id": "8:7153576723358345352",
+          "name": "menuItemid"
+        },
+        {
+          "id": "9:4608147813463984318",
+          "name": "portionId"
+        },
+        {
+          "id": "10:6926297412338024968",
+          "name": "potionAmount"
+        },
+        {
+          "id": "11:5673735033993827511",
+          "name": "finalPrice"
+        },
+        {
+          "id": "12:2359759031615808224",
+          "name": "voidOrder"
+        },
+        {
+          "id": "13:346071266866659199",
+          "name": "giftOrder"
+        },
+        {
+          "id": "14:7451035426442562962",
+          "name": "combo"
+        },
+        {
+          "id": "15:3275154201973991009",
+          "name": "notes"
+        },
+        {
+          "id": "16:5062826056524354609",
+          "name": "dineplanOrderNumber"
+        },
+        {
+          "id": "17:4270874605597882984",
+          "indexId": "5:235617499182406751",
+          "name": "orderId"
+        }
+      ],
+      "relations": [
+        {
+          "id": "7:331842535732060678",
+          "name": "comboItems"
+        },
+        {
+          "id": "8:1324178304259756687",
+          "name": "tags"
+        }
+      ]
+    },
+    {
+      "id": "12:1627054275639471977",
+      "lastPropertyId": "10:3842466035351509629",
+      "name": "WaiterOrder",
+      "properties": [
+        {
+          "id": "1:1875954608951240086",
+          "name": "id"
+        },
+        {
+          "id": "2:647286717166657898",
+          "indexId": "6:7514969693016018823",
+          "name": "dineplanOrderId"
+        },
+        {
+          "id": "3:6541223838322274754",
+          "name": "status"
+        },
+        {
+          "id": "4:5128447074523582696",
+          "indexId": "7:7651531493301028316",
+          "name": "tableId"
+        },
+        {
+          "id": "5:8214101365809030212",
+          "name": "lastSycnedDineplanData"
+        },
+        {
+          "id": "6:8366418603257493669",
+          "name": "created"
+        },
+        {
+          "id": "7:1272099057714077186",
+          "name": "notes"
+        },
+        {
+          "id": "8:2471752134705045840",
+          "name": "pax"
+        },
+        {
+          "id": "9:679056389534289253",
+          "name": "waiter"
+        },
+        {
+          "id": "10:3842466035351509629",
+          "name": "serverComputedAmount"
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "13:1846923050544300205",
+      "lastPropertyId": "6:4217645641161706943",
+      "name": "WaiterMenuItemTag",
+      "properties": [
+        {
+          "id": "1:4120138761540118564",
+          "name": "pk"
+        },
+        {
+          "id": "2:4163210753835873679",
+          "name": "tagId"
+        },
+        {
+          "id": "3:1904714869345061025",
+          "name": "name"
+        },
+        {
+          "id": "4:4822793942659319059",
+          "name": "price"
+        },
+        {
+          "id": "5:9111703284318266056",
+          "name": "weight"
+        },
+        {
+          "id": "6:4217645641161706943",
+          "name": "qty"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "13:1846923050544300205",
+  "lastIndexId": "7:7651531493301028316",
+  "lastRelationId": "8:1324178304259756687",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

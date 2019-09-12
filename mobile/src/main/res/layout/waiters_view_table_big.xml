@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/waitersCompTableBase"
+                android:orientation="vertical"
+                android:layout_width="159dp"
+                android:layout_height="160dp"
+                android:background="@drawable/bg_table_busy_attn"
+        >
+
+    <TextView
+            android:id="@+id/waitersCompTableNumber"
+            style="@style/Typography.Text.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:textSize="40sp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            tools:text="15"
+            android:textColor="#fff"
+            />
+
+    <TextView
+            android:id="@+id/waitersCompTableNumberBig"
+            style="@style/Typography.Text.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="64sp"
+            android:layout_centerInParent="true"
+            tools:text="15"
+            android:textColor="#C4C4C4"
+            />
+
+    <TextView
+            android:id="@+id/waitersCompTableGuests"
+            style="@style/Typography.Text.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="85dp"
+            android:drawableLeft="@drawable/ic_group_black_24dp"
+            android:drawableTint="#fff"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:drawablePadding="3dp"
+            android:textSize="15sp"
+            tools:text="3"
+            android:textColor="#fff"
+            />
+
+    <TextView
+            android:id="@+id/waitersCompTableMeals"
+            style="@style/Typography.Text.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="26dp"
+            android:layout_marginTop="85dp"
+            android:drawableRight="@drawable/ic_meal_black_24dp"
+            android:drawableTint="#fff"
+            android:gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:drawablePadding="3dp"
+            android:textSize="15sp"
+            tools:text="32"
+            android:textColor="#fff"
+            />
+
+    <ImageView
+            android:id="@+id/waitersCompTableIconAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_alert_black_24dp"
+            android:tint="#fff"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            />
+
+    <View
+            android:id="@+id/waitersCompTableDivider"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/waiters_table_divider"
+            />
+
+</RelativeLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/waitersToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_primary"
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+            app:title="@string/visualisation"
+            app:titleTextColor="#fff"
+            />
+
+    <com.dineplan.dinefly.panels.waiters.settings.UITablesSettingsPanel
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/waitersToolbar"
+            />
+
+</RelativeLayout>

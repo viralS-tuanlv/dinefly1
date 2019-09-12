@@ -1,0 +1,4 @@
+include ':mobile'
+include 'local-libs:numberpicker'
+
+rootProject.name = 'DineFly'

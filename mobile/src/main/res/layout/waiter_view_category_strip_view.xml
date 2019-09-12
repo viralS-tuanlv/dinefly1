@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:orientation="vertical"
+                android:minHeight="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/waiterCatStripTextSelected"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:padding="16dp"
+        android:textSize="18sp"
+        style="@style/Typography.Text.Bold"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        tools:text="Salads"
+        />
+
+    <TextView
+        android:id="@+id/waiterCatStripTextNormal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_centerVertical="true"
+        android:textSize="14sp"
+        style="@style/Typography.Text.Regular"
+        android:textColor="#000"
+        tools:text="Salads"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000"
+        android:layout_alignParentBottom="true"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/waitersToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_primary"
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+            app:titleTextColor="#fff"
+            android:elevation="15dp"
+            />
+
+    <LinearLayout
+            android:id="@+id/waitersPortionChooserButtonsRoot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+        <Button
+                android:id="@+id/waitersPortionChooserBtnLater"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/order_dialog_orderlater"
+                android:background="@color/material_green_800"
+                android:textColor="#fff"
+                />
+
+        <Button
+                android:id="@+id/waitersPortionChooserBtnNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/order_dialog_order"
+                android:background="@color/material_green_600"
+                android:textColor="#fff"
+                />
+
+    </LinearLayout>
+
+    <com.dineplan.dinefly.component.waiters.ComboOrderItemEditor
+            android:id="@+id/waitersComboChooser"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/waitersToolbar"
+            android:layout_above="@id/waitersPortionChooserButtonsRoot"
+            android:elevation="10dp"
+            />
+
+</RelativeLayout>

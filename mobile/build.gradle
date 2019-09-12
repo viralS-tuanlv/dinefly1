@@ -1,0 +1,284 @@
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+
+apply plugin: 'com.android.application'
+apply plugin: 'io.objectbox'
+apply plugin: 'io.fabric'
+
+def gitSha() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+def gitCommits() {
+    def command = new String[4]
+
+    command[0] = "git"
+    command[1] = "log"
+    command[2] = "--pretty=format:%h - %an, %ar : %s"
+    command[3] = "--since=1.days"
+
+    return new ProcessBuilder(command).start().text
+}
+
+android {
+    compileSdkVersion androidCompileSdkVersion
+    buildToolsVersion androidBuildToolsVersion
+
+    defaultConfig {
+        applicationId appId
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+        versionCode appVersionMajor * 10000 + appVersionMinor * 1000 + appVersionPatch * 100 + appVersionBuild
+        versionName "${appVersionPrefix}${appVersionMajor}.${appVersionMinor}.${appVersionPatch}${appVersionSuffix}, build ${gitSha()}"
+        archivesBaseName = "dinefly-${appVersionPrefix}${appVersionMajor}.${appVersionMinor}.${appVersionPatch}${appVersionSuffix}.${versionCode}"
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        encoding "UTF-8"
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    signingConfigs {
+        release {
+        }
+
+        debug {
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            debuggable false
+            signingConfig signingConfigs.release
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            resValue "string", "app_revision_number", "${gitSha()}"
+            ext.betaDistributionReleaseNotes = "Release Build v${appVersionMajor}.${appVersionMinor}.${appVersionPatch}\n\n${gitCommits()}"
+            ext.betaDistributionGroupAliases = "client"
+        }
+
+        debug {
+            minifyEnabled false
+            debuggable true
+            shrinkResources false
+            signingConfig signingConfigs.debug
+            resValue "string", "app_revision_number", "${gitSha()}"
+            ext.betaDistributionReleaseNotes = "Debug Build v${appVersionMajor}.${appVersionMinor}.${appVersionPatch}\n\n${gitCommits()}"
+            ext.betaDistributionGroupAliases = "client"
+        }
+    }
+
+    flavorDimensions "main"
+    productFlavors {
+        development {
+            dimension "main"
+        }
+
+        qa {
+            dimension "main"
+        }
+        
+        production {
+            dimension "main"
+        }
+    }
+
+    dexOptions {
+        jumboMode = true
+        javaMaxHeapSize "9g"
+    }
+
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'doc/HOW_TO.TXT'
+        exclude 'doc/README'
+        exclude '.readme'
+    }
+}
+
+dependencies {
+    /**
+     * Local libs and modules
+     */
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    /**
+     * Local submodules
+     */
+    implementation project(':local-libs:numberpicker')
+
+    /**
+     * Fabric
+     */
+    implementation('com.crashlytics.sdk.android:crashlytics:2.6.8@aar') {
+        transitive = true
+    }
+    /**
+     * ===============================================================
+     * System Libraries
+     * ===============================================================
+     */
+
+    /**
+     * Support library
+     */
+    implementation supportLibs.appCompat
+    implementation supportLibs.support13
+    implementation supportLibs.annotation
+    implementation supportLibs.palette
+    implementation supportLibs.recyclerView
+    implementation supportLibs.design
+    implementation supportLibs.cardView
+    implementation supportLibs.multidex
+
+    /**
+     * ===============================================================
+     * Important third-party libs, this project generally depends on
+     * ===============================================================
+     */
+
+    /**
+     * Embedded DB
+     */
+    implementation "io.objectbox:objectbox-android:$objectboxVersion"
+    annotationProcessor "io.objectbox:objectbox-processor:$objectboxVersion"
+
+    /**
+     * Events Bus
+     */
+    implementation 'org.greenrobot:eventbus:3.0.0'
+
+    /**
+     * Encryption and biometry
+     */
+    implementation 'com.mtramin:rxfingerprint:2.1.0' // https://github.com/Mauin/RxFingerprint
+    
+    /**
+     * RoboTools General Utils Library
+     */
+    implementation 'eu.livotov.labs.android:RoboToolsLibrary:3.0.5.0-RC1'
+
+    /**
+     * REST API Client
+     */
+    implementation('com.squareup.retrofit2:retrofit:2.3.0')
+            {
+                exclude module: 'okhttp'
+                exclude module: 'okhttp3'
+            }
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+
+    /**
+     * Image Loader - http://bumptech.github.io/glide/doc/getting-started.html , RecyclerView notes: http://bumptech.github.io/glide/int/recyclerview.html
+     */
+    implementation 'com.github.bumptech.glide:glide:4.1.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.1.1'
+    implementation "com.github.bumptech.glide:okhttp3-integration:4.1.1"
+    implementation ("com.github.bumptech.glide:recyclerview-integration:4.1.1") {
+        transitive = false
+    }
+
+
+    /**
+     * Annotation-based Processing Tools
+     */
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    implementation 'in.workarounds.bundler:bundler-annotations:0.1.1'
+    implementation 'in.workarounds.bundler:bundler-parceler:0.1.1'
+    annotationProcessor 'in.workarounds.bundler:bundler-compiler:0.1.1'
+
+    implementation 'org.parceler:parceler-api:1.1.9'
+    annotationProcessor 'org.parceler:parceler:1.1.9'
+
+    implementation 'com.github.hotchemi:permissionsdispatcher:2.4.0'
+    annotationProcessor 'com.github.hotchemi:permissionsdispatcher-processor:2.4.0'
+    annotationProcessor 'com.github.AleksanderMielczarek:AndroidAnnotationsPermissionsDispatcherPlugin:0.1.0'
+
+    /**
+     * MVP Support
+     */
+    implementation 'com.arello-mobile:moxy:1.5.3'
+    implementation 'com.arello-mobile:moxy-android:1.5.3'
+    implementation 'com.arello-mobile:moxy-app-compat:1.5.3'
+    annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.3'
+
+    /**
+     * Material Design Support and low-level UI libs
+     */
+    implementation 'com.dmitrymalkovich.android:material-design-dimens:1.4'
+    implementation 'com.mikepenz:materialize:1.0.3'
+    implementation 'com.mikepenz:materialdrawer:5.9.5'
+    implementation "com.mikepenz:crossfader:1.5.0@aar"
+    implementation 'com.roughike:bottom-bar:2.3.1'
+    implementation 'eu.davidea:flexible-adapter:5.0.0-rc2' // Flexible and easy to use RecyclerView adapter -> https://github.com/davideas/FlexibleAdapter
+    implementation "com.daimajia.swipelayout:library:1.2.0"
+    implementation "com.andkulikov:transitionseverywhere:1.7.6"
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
+
+    /**
+     * Camera
+     */
+    implementation 'me.dm7.barcodescanner:zxing:1.9.8'
+    
+    /**
+     * UI Dialogs
+     */
+    implementation 'com.afollestad.material-dialogs:core:0.9.4.7' // All kind of material dialogs -> https://github.com/afollestad/material-dialogs
+    implementation 'com.wdullaer:materialdatetimepicker:3.3.0' // Material Date & Time pickers -> https://github.com/wdullaer/MaterialDateTimePicker
+
+    /**
+     * UI Widgets
+     */
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4' // Material EditText widget -> https://github.com/rengwuxian/MaterialEditText
+    implementation 'com.miguelcatalan:materialsearchview:1.4.0' // Material Search Bar -> https://github.com/MiguelCatalan/MaterialSearchView
+    implementation 'me.relex:circleindicator:1.2.2@aar'
+    implementation 'org.adw.library:discrete-seekbar:1.0.1'
+    implementation 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
+    implementation 'me.zhanghai.android.materialratingbar:library:1.2.0'
+    implementation 'com.github.florent37:android-slidr:1.0.3'
+
+    /**
+     * ===============================================================
+     * Tests
+     * ===============================================================
+     */
+    androidTestImplementation 'junit:junit:4.12'
+}
+
+apply from: "${rootProject.projectDir}/config/signing.gradle"

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        >
+
+    <TextView
+            android:id="@+id/app_version"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            tools:text="v1.2.0"
+            />
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/app_version">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+            <com.dineplan.dinefly.component.commons.SettingsSectionView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:fly_title="@string/security"
+                    >
+
+                <com.dineplan.dinefly.component.commons.PrimarySettingsItemView
+                        android:id="@+id/settingsAppLocking"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:fly_title="@string/app_locks"
+                        app:fly_subtitle="@string/app_locks_info"
+                        app:fly_icon="@drawable/ic_lock_open_black_24dp"
+                        app:fly_actionIcon="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        />
+
+            </com.dineplan.dinefly.component.commons.SettingsSectionView>
+
+            <com.dineplan.dinefly.component.commons.SettingsSectionView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:fly_title="@string/user_interface"
+                    >
+
+                <com.dineplan.dinefly.component.commons.PrimarySettingsItemView
+                        android:id="@+id/settingsEntitiesVisulaisation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:fly_title="@string/visualisation"
+                        app:fly_subtitle="@string/visualisation_info"
+                        app:fly_icon="@drawable/ic_view_quilt_black_24dp"
+                        app:fly_actionIcon="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        />
+
+                <com.dineplan.dinefly.component.commons.PrimarySettingsItemView
+                        android:id="@+id/settingsMenuVisulaisation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:fly_title="@string/menu_visualisation"
+                        app:fly_subtitle="@string/menu_visualisation_info"
+                        app:fly_icon="@drawable/ic_restaurant_menu_black_24dp"
+                        app:fly_actionIcon="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        />
+
+            </com.dineplan.dinefly.component.commons.SettingsSectionView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_bill"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_printer"
+        android:title="" />
+    <item
+            android:id="@+id/menu_move_table"
+            android:title="@string/move_table"
+            app:showAsAction="always"
+            android:icon="@drawable/ic_move_to_inbox_white_24dp" />
+</menu>

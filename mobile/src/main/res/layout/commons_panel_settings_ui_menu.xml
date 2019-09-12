@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        >
+
+    <com.dineplan.dinefly.component.commons.SecondarySettingsItemView
+            android:id="@+id/settingsMenuMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fly_title="@string/menu_render_mode"
+            />
+    <com.dineplan.dinefly.component.commons.SecondarySettingsItemView
+            android:id="@+id/settingsMenuColsMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fly_title="@string/menu_cols_mode"
+            />
+
+</LinearLayout>

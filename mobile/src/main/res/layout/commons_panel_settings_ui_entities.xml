@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        >
+
+    <com.dineplan.dinefly.component.commons.SecondarySettingsItemView
+            android:id="@+id/settingsTablesMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fly_title="@string/tables_render_mode"
+            />
+
+    <com.dineplan.dinefly.component.commons.SecondarySettingsItemView
+            android:id="@+id/settingsTablesColumns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fly_title="@string/tables_render_mode_columns"
+            />
+
+    <com.dineplan.dinefly.component.commons.SecondarySettingsItemView
+            android:id="@+id/settingsTablesBg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fly_title="@string/tables_render_mode_bg"
+            app:fly_subtitle="@string/tables_render_mode_bg_info"
+            app:fly_switch="true"
+            />
+
+</LinearLayout>

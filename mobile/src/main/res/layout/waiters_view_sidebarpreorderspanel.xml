@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/orderPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="25dp"
+        android:elevation="20dp"
+        android:background="#fff"
+        >
+
+    <ImageView
+        android:id="@+id/btnNotes"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_comment_black_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="16dp"
+        />
+
+    <Button
+            android:id="@+id/waitersBtnPreorderSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/submit"
+            android:textColor="#fff"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:backgroundTint="@color/material_green_accent_700"
+            />
+
+    <Button
+            android:id="@+id/waitersBtnPreorderClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toLeftOf="@id/waitersBtnPreorderSubmit"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/clear_all"
+            android:textColor="#fff"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:backgroundTint="@color/color_primary"
+            />
+
+    <com.dineplan.dinefly.component.waiters.TicketOrdersList
+            android:id="@+id/preOrderList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/waitersBtnPreorderSubmit"
+            android:layout_alignWithParentIfMissing="true"/>
+
+</RelativeLayout>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:minHeight="72dp"
+             xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+            android:id="@+id/rear_left_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_primary"
+            android:visibility="gone"
+           >
+
+        <TextView
+                style="@style/Typography.Text.Regular"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="left|center_vertical"
+                android:padding="16dp"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:drawableLeft="@drawable/ic_delete_sweep_white_24dp"
+                android:drawablePadding="8dp"
+                android:text="@string/swipe_to_remove"
+                />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/rear_right_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/color_primary"
+            android:visibility="gone"
+            >
+
+        <TextView
+                style="@style/Typography.Text.Regular"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="right|center_vertical"
+                android:padding="16dp"
+                android:textSize="18sp"
+                android:textColor="#fff"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:drawableRight="@drawable/ic_delete_sweep_white_24dp"
+                android:drawablePadding="8dp"
+                android:text="@string/swipe_to_remove"
+                />
+        
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/master_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="?selectableItemBackground"
+            android:background="#fff"
+            android:minHeight="72dp"
+            android:paddingEnd="?listPreferredItemPaddingRight"
+            android:paddingLeft="?listPreferredItemPaddingLeft"
+            android:paddingRight="?listPreferredItemPaddingRight"
+            android:paddingStart="?listPreferredItemPaddingLeft">
+
+        <ImageView
+                android:id="@+id/waitersTicketOrderItemIcon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="19dp"
+                android:scaleType="centerCrop"
+                android:layout_alignParentTop="true"
+                />
+
+        <TextView
+                android:id="@+id/waitersTicketOrderItemIconText"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="19dp"
+                android:layout_alignParentTop="true"
+                android:gravity="center"
+                android:background="@color/color_primary"
+                android:textColor="#fff"
+                tools:text="TS"
+                />
+
+        <View
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="19dp"
+                android:scaleType="centerCrop"
+                android:layout_alignParentTop="true"
+                android:background="#75000000"
+                />
+
+        <LinearLayout
+                android:id="@+id/lines_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignWithParentIfMissing="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_toEndOf="@+id/waitersTicketOrderItemIcon"
+                android:layout_toLeftOf="@+id/waitersTicketOrderItemQty"
+                android:layout_toRightOf="@+id/waitersTicketOrderItemIcon"
+                android:layout_toStartOf="@+id/waitersTicketOrderItemQty"
+                android:orientation="vertical"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp">
+
+            <TextView
+                    android:id="@+id/waitersTicketOrderItemName"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="#8f8f8f"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    tools:text="Name" />
+
+            <TextView
+                    android:id="@+id/waitersTicketOrderItemExtras"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#8f8f8f"
+                    android:singleLine="true"
+                    tools:text="Tags" />
+
+            <TextView
+                    android:id="@+id/waitersTicketOrderItemNotes"
+                    style="@style/TextAppearance.AppCompat.Body1"
+                    android:textStyle="italic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#8f8f8f"
+                    android:singleLine="true"
+                    tools:text="Notes" />
+
+            <TextView
+                    android:id="@+id/waitersTicketOrderItemPrice"
+                    style="@style/TextAppearance.AppCompat.Body2"
+                    android:textStyle="italic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#8f8f8f"
+                    android:maxLines="20"
+                    tools:text="12.00" />
+
+        </LinearLayout>
+
+        <!-- Can be replaced by a widget -->
+        <TextView
+                android:id="@+id/waitersTicketOrderItemQty"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:drawablePadding="8dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textColor="#8f8f8f"
+                style="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="18sp"
+                android:singleLine="true"
+                android:gravity="top"
+                tools:text="5"
+                />
+
+    </RelativeLayout>
+
+</FrameLayout>

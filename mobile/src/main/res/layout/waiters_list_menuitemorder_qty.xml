@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <TextView
+        android:id="@+id/waiterMenuorderQtyValue"
+        style="@style/Typography.Text.Bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/color_primary_dark"
+        android:layout_centerVertical="true"
+        android:textSize="25sp"
+        android:layout_margin="16dp"
+        tools:text="12"
+        />
+
+    <com.github.florent37.androidslidr.Slidr
+        android:id="@+id/waiterMenuorderQtySlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_toLeftOf="@id/waiterMenuorderQtyValue"
+        app:slidr_draw_bubble="false"
+        app:slidr_textBottom_visible="false"
+        app:slidr_regions_centerText="false"
+        app:slidr_region_leftColor="@color/color_primary" />
+
+</RelativeLayout>

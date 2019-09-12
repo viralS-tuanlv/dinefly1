@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        >
+
+    <com.dineplan.dinefly.component.commons.SecondarySettingsItemView
+            android:id="@+id/settingsLock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fly_title="@string/settings_lock"
+            app:fly_subtitle="@string/settings_lock_info"
+            app:fly_switch="true"
+            />
+
+    <com.dineplan.dinefly.component.commons.SecondarySettingsItemView
+            android:id="@+id/logoutLock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fly_title="@string/logout_lock"
+            app:fly_subtitle="@string/logout_lock_info"
+            app:fly_switch="true"
+            />
+
+    <com.dineplan.dinefly.component.commons.SecondarySettingsItemView
+            android:id="@+id/tableLock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:fly_title="@string/table_lock"
+            app:fly_subtitle="@string/table_lock_info"
+            app:fly_switch="true"
+            />
+
+</LinearLayout>

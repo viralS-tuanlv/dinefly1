@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#b1b0b0"
+        android:clipChildren="false"
+        >
+
+    <android.support.v7.widget.CardView
+            android:layout_width="400dp"
+            android:layout_height="600dp"
+            android:layout_gravity="center"
+            android:padding="16dp"
+            app:cardCornerRadius="5dp"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="10dp"
+            android:clipChildren="false"
+            >
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false">
+
+            <ImageView
+                    style="@style/Typography.Text.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:layout_weight="0"
+                    android:src="@drawable/art_logos_dinefly"
+                    />
+
+            <TextView
+                    style="@style/Typography.Text.Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textSize="14sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:text="@string/please_login"
+                    />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                    android:id="@+id/loginPinFieldText"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:inputType="numberPassword"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:maxLength="10"
+                    android:imeOptions="actionGo"
+                    android:layout_gravity="center"
+                    android:visibility="gone" />
+
+            <com.dineplan.dinefly.component.commons.PinView
+                    android:id="@+id/pinview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp" />
+
+            <com.dineplan.dinefly.component.commons.PinpadView
+                    android:id="@+id/pinpad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                     />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <Button
+            android:id="@+id/btnUnlink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="24dp"
+            android:layout_gravity="bottom|center"
+            android:text="@string/unlink_device"/>
+
+</FrameLayout>

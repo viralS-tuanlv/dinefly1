@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#fff"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/waitersToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/color_primary"
+            app:navigationIcon="@drawable/ic_arrow_back_white_24dp"
+            app:titleTextColor="#fff"
+            android:elevation="15dp"
+            />
+
+    <RelativeLayout
+            android:id="@+id/waitersTableHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/waitersToolbar"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp"
+            android:elevation="15dp"
+            android:background="@color/color_primary">
+
+        <TextView
+                style="@style/Typography.Text.Regular"
+                android:id="@+id/waiterTableTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="#fff"
+                tools:text="Table 1, Indoor"
+                />
+
+        <TextView
+                style="@style/Typography.Text.Regular"
+                android:id="@+id/waiterTableGuestsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_below="@id/waiterTableTitle"
+                android:textSize="14sp"
+                android:textColor="#fff"
+                android:text="@string/guests_count_title"
+                />
+
+        <TextView
+                style="@style/Typography.Text.Regular"
+                android:id="@+id/waiterTableWaiterTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_below="@id/waiterTableTitle"
+                android:layout_toRightOf="@id/waiterTableGuestsTitle"
+                android:textSize="14sp"
+                android:textColor="#fff"
+                android:text="@string/table_waiter_title"
+                />
+
+        <TextView
+                style="@style/Typography.Text.Regular"
+                android:id="@+id/waiterTableDurationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="26dp"
+                android:layout_below="@id/waiterTableTitle"
+                android:layout_toRightOf="@id/waiterTableWaiterTitle"
+                android:textSize="14sp"
+                android:textColor="#fff"
+                android:text="@string/table_duration_title"
+                />
+
+        <TextView
+                style="@style/Typography.Text.Regular"
+                android:id="@+id/waiterTableGuests"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_below="@id/waiterTableGuestsTitle"
+                android:textSize="14sp"
+                android:textColor="#fff"
+                tools:text="2"
+                />
+
+        <TextView
+                style="@style/Typography.Text.Regular"
+                android:id="@+id/waiterTableWaiter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="26dp"
+                android:layout_below="@id/waiterTableWaiterTitle"
+                android:layout_toRightOf="@id/waiterTableGuestsTitle"
+                android:textSize="14sp"
+                android:textColor="#fff"
+                tools:text="2"
+                />
+
+        <TextView
+                style="@style/Typography.Text.Regular"
+                android:id="@+id/waiterTableDuration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="26dp"
+                android:layout_below="@id/waiterTableWaiterTitle"
+                android:layout_toRightOf="@id/waiterTableWaiterTitle"
+                android:textSize="14sp"
+                android:textColor="#fff"
+                tools:text="1 hour 55 mins"
+                />
+
+        <Button
+                android:id="@+id/btnPayOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignBaseline="@id/waiterTableGuests"
+                android:backgroundTint="@color/material_light_green_600"
+                android:textColor="#fff"
+                tools:text="$ 100.50"
+                />
+
+        <Button
+            android:id="@+id/btnFeedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/btnPayOrder"
+            android:layout_alignBaseline="@id/waiterTableGuests"
+            android:backgroundTint="@color/material_light_green_600"
+            android:textColor="#fff"
+            android:text="@string/feedback"
+            />
+
+    </RelativeLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresher"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/waitersTableHeader"
+            android:elevation="1dp"
+            android:background="#fff"
+            >
+
+        <com.dineplan.dinefly.component.waiters.TicketOrdersList
+                android:id="@+id/ordersList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnAddMeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            app:backgroundTint="@color/color_primary"
+            android:src="@drawable/ic_add_white_24dp"
+            app:elevation="6dp"
+            app:fabSize="normal"
+            app:pressedTranslationZ="12dp" />
+
+</RelativeLayout>

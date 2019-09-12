@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SettingsViewsFramework">
+        <attr name="fly_title" format="string" />
+        <attr name="fly_subtitle" format="string" />
+        <attr name="fly_icon" format="reference" />
+        <attr name="fly_actionIcon" format="reference" />
+        <attr name="fly_switch" format="boolean" />
+        <attr name="fly_switchValue" format="boolean" />
+    </declare-styleable>
+
+</resources>

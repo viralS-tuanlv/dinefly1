@@ -1,0 +1,4 @@
+<resources>
+    <string name="tag_min_qty_violation">For %s you must select at least %d items</string>
+    <string name="tag_max_qty_violation">For %s you must select no more than %d items</string>
+</resources>

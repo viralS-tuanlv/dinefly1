@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="prefs_displaymode_tables">prefs_displaymode_tables</string>
+    <string name="prefs_displaymode_tables_columns">prefs_displaymode_tables_columns</string>
+    <string name="prefs_displaymode_tables_background">prefs_displaymode_tables_background</string>
+    <string name="prefs_displaymode_menu_mode">prefs_displaymode_menu_mode</string>
+    <string name="prefs_displaymode_menu_columns">prefs_displaymode_menu_columns</string>
+
+    <string name="prefs_security_lock_logout">prefs_security_lock_logout</string>
+    <string name="prefs_security_lock_table">prefs_security_lock_table</string>
+    <string name="prefs_security_lock_settings">prefs_security_lock_settings</string>
+
+</resources>
