@@ -73,8 +73,8 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
     @BindView(R.id.waitersToolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.waiterMenuCatsTabs)
-    @Nullable
+//    @BindView(R.id.waiterMenuCatsTabs)
+//    @Nullable
     CategoriesTabStripView catsTabsView;
 
     @BindView(R.id.waiterMenuCatsLIst)
