@@ -183,6 +183,7 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
 
     private void showData()
     {
+        ///do logger to test
         final WaiterTable table = tablePresenter.getTable(tableId);
 
         if (table != null)
