@@ -1,12 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-<TextView
-    android:id="@+id/row"
-    android:layout_width="match_parent"
-    android:maxLines="1"
-    android:gravity="end"
-    android:layout_height="wrap_content" />
-</LinearLayout>
+    <TextView
+        android:id="@+id/center"
+        android:textSize="14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:textSize="11dp"
+        android:layout_alignParentRight="true" />
+    <LinearLayout
+        android:id="@+id/textlr"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/left"
+            android:textSize="11dp"
+            android:text="leftsdbfhsbfhdbhsbfhbsbhfhd"
+            android:layout_marginRight="30dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/bills"
+            android:orientation="horizontal"
+            android:layout_alignParentRight="true"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/qty"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_marginRight="10dp"
+                android:textSize="11dp"
+                android:layout_alignParentRight="true" />
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:layout_marginRight="10dp"
+                android:textSize="11dp"
+                android:layout_alignParentRight="true" />
+            <TextView
+                android:id="@+id/price1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:textSize="11dp"
+                android:layout_alignParentRight="true" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

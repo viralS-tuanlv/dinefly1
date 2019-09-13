@@ -27,13 +27,15 @@ public class DialogPrint extends Dialog implements DialogPrintPresenter.View {
     private RecyclerView list;
     private ProgressBar loading;
     private AdapterPrint adapterPrint;
+    private TextView err;
 
     DialogPrintPresenter dialogPrintPresenter;
     public DialogPrint(Context context, long ticketId) {
         super(context);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.print_layout);
-
+        getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT);
         setCancelable(true);
         initView(context, ticketId);
     }
@@ -42,6 +44,7 @@ public class DialogPrint extends Dialog implements DialogPrintPresenter.View {
         btnClose = findViewById(R.id.btnClose);
         list = findViewById(R.id.list);
         loading = findViewById(R.id.loading);
+        err = findViewById(R.id.error);
         dialogPrintPresenter = new DialogPrintPresenter(this);
         list.setLayoutManager(new LinearLayoutManager(context));
         dialogPrintPresenter.getBill(ticketId);
@@ -55,24 +58,24 @@ public class DialogPrint extends Dialog implements DialogPrintPresenter.View {
 
     @Override
     public void onLoading() {
-        btnClose.setVisibility(View.GONE);
         loading.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onError(String msg) {
-        btnClose.setVisibility(View.VISIBLE);
+        err.setVisibility(View.VISIBLE);
         loading.setVisibility(View.GONE);
+        err.setText(msg);
     }
 
     @Override
     public void loadBillSuccess(List<String> content) {
-        btnClose.setVisibility(View.VISIBLE);
         loading.setVisibility(View.GONE);
+        err.setVisibility(View.GONE);
         List<String> newContent = new ArrayList<>();
         for (int i = 0; i < content.size(); i++) {
             if (content.get(i).length() >= 4) {
-                newContent.add(content.get(i));
+                newContent.add(content.get(i).trim().replace("--C--", ""));
             }
         }
         adapterPrint = new AdapterPrint(newContent);
