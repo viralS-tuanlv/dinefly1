@@ -1,15 +1,7 @@
 package com.dineplan.dinefly.activity.waiters.dialogprint;
 
-import android.util.Log;
-
-import com.arellomobile.mvp.InjectViewState;
-import com.arellomobile.mvp.MvpPresenter;
-import com.arellomobile.mvp.MvpView;
-import com.arellomobile.mvp.viewstate.strategy.AddToEndStrategy;
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.dineplan.dinefly.core.App;
 import com.dineplan.dinefly.core.api.model.api.bill.BillData;
-import com.dineplan.dinefly.core.api.model.api.in.DineplanMenuResult;
 
 import java.util.List;
 
