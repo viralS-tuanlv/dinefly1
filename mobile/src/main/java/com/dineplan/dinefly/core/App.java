@@ -21,6 +21,7 @@ public class App extends BaseApp implements Application.ActivityLifecycleCallbac
     Activity lastRegisteredActivity;
     int activitiesUp;
 
+    ///in logger to test
     public static AppSettings getSettings()
     {
         return ((App) getInstance()).settings;
