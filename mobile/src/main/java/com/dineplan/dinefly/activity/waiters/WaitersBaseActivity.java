@@ -3,7 +3,6 @@ package com.dineplan.dinefly.activity.waiters;
 import android.content.Intent;
 import com.dineplan.dinefly.activity.MainActivity;
 import com.dineplan.dinefly.activity.base.BaseActivity;
-import com.dineplan.dinefly.activity.waiters.WaitersLoginActivity;
 import com.dineplan.dinefly.core.App;
 import com.dineplan.dinefly.data.model.TerminalType;
 import in.workarounds.bundler.Bundler;
