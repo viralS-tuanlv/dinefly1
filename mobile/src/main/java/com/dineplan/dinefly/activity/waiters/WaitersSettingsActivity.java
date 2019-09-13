@@ -14,10 +14,6 @@ import com.dineplan.dinefly.panels.waiters.settings.UITablesSettingsPanel;
 import in.workarounds.bundler.Bundler;
 import in.workarounds.bundler.annotations.RequireBundler;
 
-/**
- * Created by dlivotov on 07/06/2016.
- */
-
 @RequireBundler
 public class WaitersSettingsActivity extends WaitersBaseActivity implements MainSettingsPanel.Callback
 {

@@ -2,7 +2,6 @@ package com.dineplan.dinefly.core;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 import android.os.Bundle;
 import com.arellomobile.mvp.MvpFacade;
 import com.crashlytics.android.Crashlytics;
@@ -15,7 +14,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class App extends BaseApp implements Application.ActivityLifecycleCallbacks
 {
-
+///in main activity
     AppSettings settings;
     DataManager dataManager;
     Activity lastRegisteredActivity;
