@@ -14,7 +14,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 public class App extends BaseApp implements Application.ActivityLifecycleCallbacks
 {
-///in main activity
     AppSettings settings;
     DataManager dataManager;
     Activity lastRegisteredActivity;

@@ -14,7 +14,6 @@ import in.workarounds.bundler.Bundler;
 public class MainActivity extends BaseActivity
 {
 
-    ///in dialog
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
