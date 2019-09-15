@@ -1,65 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
-    <ImageView
-            android:id="@+id/waiterMenuItemPicture"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            />
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/waiterMenuItemPicture"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                />
 
-    <TextView
-            android:id="@+id/waiterMenuItemAlias"
-            style="@style/Typography.Text.Light"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="63dp"
-            android:gravity="center"
-            android:textColor="#fff"
-            android:textSize="38sp"
-            android:textAllCaps="true"
-            tools:text="LP"/>
+            <TextView
+                android:id="@+id/waiterMenuItemAlias"
+                style="@style/Typography.Text.Light"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="35sp"
+                android:textAllCaps="true"
+                tools:text="LP"/>
+        </RelativeLayout>
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="0dp"
+           android:background="#a6000000"
+           android:layout_weight="1">
 
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:background="#a6000000"
-            android:layout_alignParentBottom="true"/>
+           <TextView
+               android:id="@+id/waiterMenuItemPrice"
+               style="@style/Typography.Text.Medium"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentRight="true"
+               android:layout_centerVertical="true"
+               android:layout_marginLeft="8dp"
+               android:layout_marginRight="8dp"
+               android:layout_marginBottom="8dp"
+               android:gravity="top|left"
+               android:textColor="#fff"
+               android:textSize="17sp"
+               tools:text="$15.00"/>
 
-    <TextView
-            android:id="@+id/waiterMenuItemPrice"
-            style="@style/Typography.Text.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="top|left"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            tools:text="$15.00"/>
+           <TextView
+               android:id="@+id/waiterMenuItemName"
+               style="@style/Typography.Text.Regular"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_toLeftOf="@id/waiterMenuItemPrice"
+               android:padding="8dp"
+               android:gravity="top|left"
+               android:textColor="#fff"
+               android:textSize="12sp"
+               android:layout_centerVertical="true"
+               android:maxLines="3"
+               android:ellipsize="end"
+               tools:text="Piza Salam - sal\nam, cheese,\nvegerables.\n500 - 1500 gr."/>
 
-    <TextView
-            android:id="@+id/waiterMenuItemName"
-            style="@style/Typography.Text.Regular"
-            android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@id/waiterMenuItemPrice"
-            android:padding="8dp"
-            android:gravity="top|left"
-            android:textColor="#fff"
-            android:textSize="14sp"
-            android:maxLines="3"
-            android:ellipsize="end"
-            tools:text="Piza Salam - sal\nam, cheese,\nvegerables.\n500 - 1500 gr."/>
+       </RelativeLayout>
 
 
-</merge>
+    </LinearLayout>
+
+
+
+</RelativeLayout>
