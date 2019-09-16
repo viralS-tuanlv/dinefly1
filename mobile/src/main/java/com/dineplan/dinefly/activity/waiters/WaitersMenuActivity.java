@@ -39,6 +39,7 @@ import com.dineplan.dinefly.logic.waiters.WaiterMenuSyncPresenter;
 import com.dineplan.dinefly.logic.waiters.WaiterOrderPresenter;
 import com.dineplan.dinefly.logic.waiters.WaiterScratchpadPresenter;
 import com.dineplan.dinefly.logic.waiters.WaiterTablePresenter;
+import com.dineplan.dinefly.util.SharedPrefs;
 import com.miguelcatalan.materialsearchview.MaterialSearchView;
 import com.transitionseverywhere.Fade;
 import com.transitionseverywhere.TransitionManager;
@@ -55,13 +56,16 @@ import in.workarounds.bundler.annotations.Arg;
 import in.workarounds.bundler.annotations.RequireBundler;
 import in.workarounds.bundler.annotations.Required;
 
+import static com.dineplan.dinefly.util.SharedPrefs.HORIZONTAL;
+import static com.dineplan.dinefly.util.SharedPrefs.MENU_TYPE;
+import static com.dineplan.dinefly.util.SharedPrefs.VERTICAL;
+
 /**
  * Created by dlivotov on 07/06/2016.
  */
 
 @RequireBundler
-public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTablePresenter.View, WaiterMenuSyncPresenter.View, WaiterMenuPresenter.View, WaiterOrderPresenter.View, WaiterScratchpadPresenter.View
-{
+public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTablePresenter.View, WaiterMenuSyncPresenter.View, WaiterMenuPresenter.View, WaiterOrderPresenter.View, WaiterScratchpadPresenter.View {
 
     @Arg
     @Required
@@ -73,8 +77,8 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
     @BindView(R.id.waitersToolbar)
     Toolbar toolbar;
 
-//    @BindView(R.id.waiterMenuCatsTabs)
-//    @Nullable
+    @BindView(R.id.waiterMenuCatsTabs)
+    @Nullable
     CategoriesTabStripView catsTabsView;
 
     @BindView(R.id.waiterMenuCatsLIst)
@@ -131,17 +135,41 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
     static volatile String orderComments;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundler.inject(this);
 
-        if (checkAuthorisation())
-        {
+        if (checkAuthorisation()) {
             setContentView(R.layout.activity_waiters_menu);
             setResult(RESULT_CANCELED);
             configure();
             showData();
+        }
+        if (!App.isTablet()) {
+            setUpMenu();
+        } else {
+            toolbar.getMenu().findItem(R.id.menu_switch).setVisible(false);
+        }
+    }
+
+    private void setUpMenu() {
+        final MenuItem itemChange = toolbar.getMenu().findItem(R.id.menu_switch);
+        switch (SharedPrefs.getInstance().get(MENU_TYPE, String.class)) {
+            case HORIZONTAL:
+                catsTabsView.setVisibility(View.VISIBLE);
+                catsListView.setVisibility(View.GONE);
+                itemChange.setTitle(getString(R.string.menu_horizontal));
+                break;
+            case VERTICAL:
+                catsTabsView.setVisibility(View.GONE);
+                catsListView.setVisibility(View.VISIBLE);
+                itemChange.setTitle(getString(R.string.menu_vertical));
+                break;
+            default:
+                catsTabsView.setVisibility(View.VISIBLE);
+                catsListView.setVisibility(View.GONE);
+                itemChange.setTitle(getString(R.string.menu_horizontal));
+                break;
         }
     }
 
@@ -152,171 +180,137 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
         }
     }
 
-    public void onBackPressed()
-    {
-        if (searchView.isSearchOpen())
-        {
+    public void onBackPressed() {
+        if (searchView.isSearchOpen()) {
             searchView.closeSearch();
-        }
-        else if (sidebar != null && sidebar.hasPreorders())
-        {
-            if (sidebar.isOpen())
-            {
+        } else if (sidebar != null && sidebar.hasPreorders()) {
+            if (sidebar.isOpen()) {
                 showToast(R.string.unconfirmed_preorders_on_menu_exit_warning, false);
-            }
-            else
-            {
+            } else {
                 sidebar.open();
             }
-        }
-        else
-        {
+        } else {
             quitScreen();
         }
     }
 
     @Override
-    protected void onPause()
-    {
+    protected void onPause() {
         super.onPause();
     }
 
-    private void showData()
-    {
+    private void showData() {
         final WaiterTable table = tablePresenter.getTable(tableId);
 
-        if (table != null)
-        {
+        if (table != null) {
             showToolbarData(table);
             showMenu();
             showUpdatedOrder(table);
-        }
-        else
-        {
+        } else {
             quitScreen();
         }
     }
 
-    private void quitScreen()
-    {
-        if (tableId == 0)
-        {
+    private void quitScreen() {
+        if (tableId == 0) {
             App.getDataManager().getWaiterDataManage().logoff();
             finish();
-        }
-        else
-        {
+        } else {
             super.onBackPressed();
         }
     }
 
-    private void showMenu()
-    {
+    private void showMenu() {
         final List<WaiterMenuCategory> menu = App.getDataManager().getWaiterDataManage().getMenu();
         menuView.setData(menu);
 
-        if (catsTabsView!=null) {
+        if (catsTabsView != null) {
             catsTabsView.setData(menuView);
         }
 
-        if (catsListView!=null) catsListView.setData(menu);
+        if (catsListView != null) catsListView.setData(menu);
     }
 
-    private void showToolbarData(final WaiterTable table)
-    {
-        if (table.isVirtualTable())
-        {
+    private void showToolbarData(final WaiterTable table) {
+        if (table.isVirtualTable()) {
             toolbar.setTitle(R.string.quick_order_mode);
             toolbar.setNavigationIcon(R.drawable.ic_close_white_24dp);
-        }
-        else
-        {
+        } else {
             toolbar.setTitle(getString(R.string.table_details_toolbar_title, table.getName()));
             toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp);
         }
     }
 
-    private void configure()
-    {
+    private void setMenuView() {
+        final MenuItem itemChange = toolbar.getMenu().findItem(R.id.menu_switch);
+        if (SharedPrefs.getInstance().get(MENU_TYPE, String.class).equals(VERTICAL)) {
+            SharedPrefs.getInstance().put(MENU_TYPE, HORIZONTAL);
+            itemChange.setTitle(getString(R.string.menu_horizontal));
+        } else {
+            SharedPrefs.getInstance().put(MENU_TYPE, VERTICAL);
+            itemChange.setTitle(getString(R.string.menu_vertical));
+        }
+        setUpMenu();
+    }
+    private void configure() {
         final boolean sidebarPreorderMode = (!App.isTablet() || getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT);
 
-        if (sidebarPreorderMode)
-        {
-            sidebar = new PreoderSidebar(this, new PreoderSidebar.Callback()
-            {
-                public void onClearPreorder()
-                {
+        if (sidebarPreorderMode) {
+            sidebar = new PreoderSidebar(this, new PreoderSidebar.Callback() {
+                public void onClearPreorder() {
                     onClearPreoderClick();
                 }
 
-                public void onSubmitPreorder()
-                {
+                public void onSubmitPreorder() {
                     onSubmitPreorderClick();
                 }
 
-                public void onRemovePreorderItemFromDrawer(final WaiterOrderSaleItem item)
-                {
+                public void onRemovePreorderItemFromDrawer(final WaiterOrderSaleItem item) {
                     orderPresenter.removePreorderedItem(item);
                 }
 
-                public void onEditPreorderedItem(final WaiterOrderSaleItem item)
-                {
-                    if (item.getComboItems().size() > 0)
-                    {
+                public void onEditPreorderedItem(final WaiterOrderSaleItem item) {
+                    if (item.getComboItems().size() > 0) {
                         Bundler.waitersComboChooserActivity(tableId, item.getMenuItemid()).orderItemId(item.getId()).start(WaitersMenuActivity.this);
-                    }
-                    else
-                    {
+                    } else {
                         Bundler.waitersPortionChooserActivity(tableId, item.getMenuItemid()).orderItemId(item.getId()).start(WaitersMenuActivity.this);
                     }
                 }
 
-                public void onMoveAllPreorderedItemsToServeLaterStatus()
-                {
+                public void onMoveAllPreorderedItemsToServeLaterStatus() {
                     orderPresenter.moveAllToSaveLater(tableId);
                 }
 
                 @Override
-                public void onEditPreorderNotes()
-                {
+                public void onEditPreorderNotes() {
                     editPreorderNote();
                 }
             });
 
             toolbar.inflateMenu(R.menu.waiters_screen_menu_withsidebar);
-            toolbar.getMenu().findItem(R.id.menu_cart).getActionView().setOnClickListener(new View.OnClickListener()
-            {
-                public void onClick(final View view)
-                {
+            toolbar.getMenu().findItem(R.id.menu_cart).getActionView().setOnClickListener(new View.OnClickListener() {
+                public void onClick(final View view) {
                     openPreorderSidebar();
                 }
             });
             cartBadge = (TextView) toolbar.getMenu().findItem(R.id.menu_cart).getActionView().findViewById(R.id.icon_badge);
-        }
-        else
-        {
+        } else {
             toolbar.inflateMenu(R.menu.waiters_screen_menu);
         }
 
-        if (catsTabsView != null)
-        {
+        if (catsTabsView != null) {
             catsTabsView.setData(menuView);
         }
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(final View view)
-            {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            public void onClick(final View view) {
                 onBackPressed();
             }
         });
 
-        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener()
-        {
-            public boolean onMenuItemClick(final MenuItem item)
-            {
-                switch (item.getItemId())
-                {
+        toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(final MenuItem item) {
+                switch (item.getItemId()) {
                     case R.id.menu_search:
                         openSearchMode();
                         return true;
@@ -328,33 +322,30 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
                     case R.id.menu_toggle_mode:
                         toggleDisplayMode();
                         return true;
+                    case R.id.menu_switch:
+                        setMenuView();
+                        return true;
                 }
 
                 return false;
             }
         });
 
-        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener()
-        {
-            public boolean onQueryTextSubmit(final String query)
-            {
+        searchView.setOnQueryTextListener(new MaterialSearchView.OnQueryTextListener() {
+            public boolean onQueryTextSubmit(final String query) {
                 showFilteredMenu(query);
                 return true;
             }
 
-            public boolean onQueryTextChange(final String query)
-            {
+            public boolean onQueryTextChange(final String query) {
                 showFilteredMenu(query);
                 return true;
             }
         });
 
-        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener()
-        {
-            public void onSearchViewShown()
-            {
-                if (catsTabsView != null)
-                {
+        searchView.setOnSearchViewListener(new MaterialSearchView.SearchViewListener() {
+            public void onSearchViewShown() {
+                if (catsTabsView != null) {
                     catsTabsView.setVisibility(View.GONE);
                 }
 
@@ -364,9 +355,8 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
                 refresher.setVisibility(View.GONE);
             }
 
-            public void onSearchViewClosed()
-            {
-                if (catsTabsView!=null) catsTabsView.setVisibility(View.VISIBLE);
+            public void onSearchViewClosed() {
+                if (catsTabsView != null) catsTabsView.setVisibility(View.VISIBLE);
                 searchResults.setData(new ArrayList<WaiterMenuItem>(), false);
                 searchResults.setVisibility(View.GONE);
                 menuView.setVisibility(View.VISIBLE);
@@ -375,79 +365,61 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
             }
         });
 
-        searchResults.setCallback(new MenuGrid.Callback()
-        {
-            public void onTableSelected(final WaiterMenuItem item, List<WaiterMenuItem> tagData)
-            {
+        searchResults.setCallback(new MenuGrid.Callback() {
+            public void onTableSelected(final WaiterMenuItem item, List<WaiterMenuItem> tagData) {
                 processmenuItemClick(item, tagData);
             }
         });
 
-        if (catsTabsView!=null) catsTabsView.setCallback(new CategoriesTabStripView.Callback()
-        {
-            public void onCategorySelected(final WaiterMenuCategory cat)
-            {
+        if (catsTabsView != null) catsTabsView.setCallback(new CategoriesTabStripView.Callback() {
+            public void onCategorySelected(final WaiterMenuCategory cat) {
                 menuView.openCategory(cat);
             }
         });
 
-        if (catsListView!=null) catsListView.setCallback(new CategoriesStripView.Callback() {
+        if (catsListView != null) catsListView.setCallback(new CategoriesStripView.Callback() {
             @Override
             public void onCategorySelected(WaiterMenuCategory cat) {
                 menuView.openCategory(cat);
             }
         });
 
-        menuView.setCallback(new MenuCategoryListingPager.Callback()
-        {
-            public void onCategoryOpened(final int index, final WaiterMenuCategory category)
-            {
-                if (catsListView!=null) catsListView.selectCategory(category);
+        menuView.setCallback(new MenuCategoryListingPager.Callback() {
+            public void onCategoryOpened(final int index, final WaiterMenuCategory category) {
+                if (catsListView != null) catsListView.selectCategory(category);
             }
 
-            public void onMenuItemSelected(final WaiterMenuItem item, List<WaiterMenuItem> tagData)
-            {
+            public void onMenuItemSelected(final WaiterMenuItem item, List<WaiterMenuItem> tagData) {
                 processmenuItemClick(item, tagData);
             }
         });
 
-        if (preorderList != null)
-        {
-            preorderList.setCallback(new TicketOrdersList.Callback()
-            {
-                public void onRemovePreorderedItem(final WaiterOrderSaleItem item)
-                {
+        if (preorderList != null) {
+            preorderList.setCallback(new TicketOrdersList.Callback() {
+                public void onRemovePreorderedItem(final WaiterOrderSaleItem item) {
                     orderPresenter.removePreorderedItem(item);
                 }
 
-                public void onHeaderButtonClick(final Object tag)
-                {
+                public void onHeaderButtonClick(final Object tag) {
                     orderPresenter.moveAllToSaveLater(tableId);
                 }
 
-                public void onEditTicketNotes(final WaiterOrder ticket)
-                {
+                public void onEditTicketNotes(final WaiterOrder ticket) {
 
                 }
 
-                public void onEditPreorderedItem(final WaiterOrderSaleItem item)
-                {
-                    if (item.getComboItems().size() > 0)
-                    {
+                public void onEditPreorderedItem(final WaiterOrderSaleItem item) {
+                    if (item.getComboItems().size() > 0) {
                         App.getContext().startActivity(Bundler.waitersComboChooserActivity(tableId, item.getMenuItemid()).orderItemId(item.getId()).intent(App.getContext()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-                    }
-                    else
-                    {
+                    } else {
                         App.getContext().startActivity(Bundler.waitersPortionChooserActivity(tableId, item.getMenuItemid()).orderItemId(item.getId()).intent(App.getContext()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     }
                 }
             });
         }
 
-        refresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener()
-        {
-            public void onRefresh()
-            {
+        refresher.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            public void onRefresh() {
                 menuSyncPresenter.syncMenu();
             }
         });
@@ -455,41 +427,32 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
         menuView.setSwipeToRefreshComponent(refresher);
     }
 
-    private void processmenuItemClick(final WaiterMenuItem item, final List<WaiterMenuItem> tagData)
-    {
-        if (tagData.size() > 0)
-        {
+    private void processmenuItemClick(final WaiterMenuItem item, final List<WaiterMenuItem> tagData) {
+        if (tagData.size() > 0) {
             scratchpadPresenter.menuItem = item;
             scratchpadPresenter.menuItems.clear();
             scratchpadPresenter.menuItems.addAll(tagData);
             startActivityForResult(new Intent(this, WaitersSubtagSelectionActivity.class), 123);
-        }
-        else
-        {
+        } else {
             editItem(item);
         }
     }
 
     @Optional
     @OnClick(R.id.btnNotes)
-    void editPreorderNote()
-    {
-        new MaterialDialog.Builder(this).title(R.string.order_comments).input(getString(R.string.type_order_comments), orderComments, true, new MaterialDialog.InputCallback()
-        {
+    void editPreorderNote() {
+        new MaterialDialog.Builder(this).title(R.string.order_comments).input(getString(R.string.type_order_comments), orderComments, true, new MaterialDialog.InputCallback() {
             @Override
-            public void onInput(@NonNull MaterialDialog dialog, CharSequence input)
-            {
+            public void onInput(@NonNull MaterialDialog dialog, CharSequence input) {
                 orderComments = input.toString();
             }
         }).show();
     }
 
-    private void toggleDisplayMode()
-    {
+    private void toggleDisplayMode() {
         final MenuDisplayMode displayMode = App.getSettings().getMenuDisplayMode();
 
-        switch (displayMode)
-        {
+        switch (displayMode) {
             case GridRich:
                 App.getSettings().setMenuDisplayMode(MenuDisplayMode.PlainText);
                 break;
@@ -503,72 +466,56 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
         App.getContext().startActivity(Bundler.waitersMenuActivity(tableId).intent(App.getContext()).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
-    private void openPreorderSidebar()
-    {
-        if (sidebar != null)
-        {
+    private void openPreorderSidebar() {
+        if (sidebar != null) {
             sidebar.open();
         }
     }
 
-    private void showFilteredMenu(final String query)
-    {
+    private void showFilteredMenu(final String query) {
         searchResults.setData(menuPresenter.queryMenu(query), false);
     }
 
-    private void openSearchMode()
-    {
+    private void openSearchMode() {
         searchView.showSearch(true);
     }
 
-    private void editItem(final WaiterMenuItem item)
-    {
-        if (item.checkIfCombo())
-        {
+    private void editItem(final WaiterMenuItem item) {
+        if (item.checkIfCombo()) {
             Bundler.waitersComboChooserActivity(tableId, item.getItemId()).start(this);
-        }
-        else
-        {
+        } else {
             Bundler.waitersPortionChooserActivity(tableId, item.getItemId()).start(this);
         }
     }
 
-    private void showUpdatedOrder(final WaiterTable table)
-    {
+    private void showUpdatedOrder(final WaiterTable table) {
         final WaiterOrder orderForTable = orderPresenter.getOrderForTable(tableId);
         final int preorders = orderForTable.getPreordersCount();
         final int currorder = orderForTable.getCurrentOrderCount();
 
         orderComments = orderForTable.getNotes() != null ? orderForTable.getNotes() : "";
 
-        if (preorderList != null)
-        {
+        if (preorderList != null) {
             preorderList.setQuickOrderMode(table.isVirtualTable());
             preorderList.setData(orderForTable, true);
         }
 
-        if (sidebar != null)
-        {
+        if (sidebar != null) {
             sidebar.setQuickOrderMode(table.isVirtualTable());
             sidebar.setData(orderForTable);
 
-            if (preorders == 0)
-            {
+            if (preorders == 0) {
                 sidebar.closeAndLock();
-            }
-            else
-            {
+            } else {
                 sidebar.unlock();
             }
 
             final MenuItem item = toolbar.getMenu().findItem(R.id.menu_cart);
 
-            if (item != null)
-            {
+            if (item != null) {
                 item.setVisible(preorders > 0 || currorder > 0);
 
-                if (cartBadge != null)
-                {
+                if (cartBadge != null) {
                     cartBadge.setText("" + preorders);
                     cartBadge.setVisibility(preorders > 0 ? View.VISIBLE : View.GONE);
                 }
@@ -577,154 +524,120 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
             }
         }
 
-        if (preorderPanel != null)
-        {
+        if (preorderPanel != null) {
             preorderPanel.setVisibility((preorders > 0 || currorder > 0) ? View.VISIBLE : View.GONE);
 
-            if (btnClear != null)
-            {
+            if (btnClear != null) {
                 btnClear.setVisibility(preorders > 0 ? View.VISIBLE : View.GONE);
             }
 
-            if (btnSubmit != null)
-            {
+            if (btnSubmit != null) {
                 btnSubmit.setVisibility(preorders > 0 ? View.VISIBLE : View.GONE);
             }
         }
     }
 
-    public void onMenuSyncError(final DineflyException e)
-    {
+    public void onMenuSyncError(final DineflyException e) {
         refresher.setRefreshing(false);
         showError(e);
     }
 
-    public void onMenuSynced()
-    {
+    public void onMenuSynced() {
         refresher.setRefreshing(false);
         showData();
     }
 
     @OnClick(R.id.waitersBtnPreorderSubmit)
     @Optional
-    void onSubmitPreorderClick()
-    {
+    void onSubmitPreorderClick() {
         showBlockingIndeterminateProgressDialog(false, null, getString(R.string.please_wait));
         orderPresenter.checkSoldOuts(tableId);
     }
 
-    void askPaxWaiterAndFinishOrderSubmission()
-    {
-        if (!tablePresenter.getTable(tableId).isVirtualTable() && orderPresenter.needToSetPaxData(tableId))
-        {
-            new PaxDataDialog(this).show(new PaxDataDialog.Callback()
-            {
-                public void onPaxDataSet(final String pax, final String waiter)
-                {
+    void askPaxWaiterAndFinishOrderSubmission() {
+        if (!tablePresenter.getTable(tableId).isVirtualTable() && orderPresenter.needToSetPaxData(tableId)) {
+            new PaxDataDialog(this).show(new PaxDataDialog.Callback() {
+                public void onPaxDataSet(final String pax, final String waiter) {
                     submitPreorderAndFinish(pax, waiter);
                 }
 
             });
-        }
-        else
-        {
+        } else {
             submitPreorderAndFinish(null, null);
         }
     }
 
-    private void submitPreorderAndFinish(final String pax, final String waiter)
-    {
-        if (tableId == 0)
-        {
+    private void submitPreorderAndFinish(final String pax, final String waiter) {
+        if (tableId == 0) {
             showBlockingIndeterminateProgressDialog(false, null, getString(R.string.please_wait));
             orderPresenter.submitPreorderWithResult(tableId, pax, waiter, orderComments);
-        }
-        else
-        {
+        } else {
             orderPresenter.submitPreorderWithResult(tableId, pax, waiter, orderComments);
         }
     }
 
     @OnClick(R.id.waitersBtnPreorderClear)
     @Optional
-    void onClearPreoderClick()
-    {
+    void onClearPreoderClick() {
         orderPresenter.clearPreorder(tableId);
 
-        if (sidebar != null)
-        {
+        if (sidebar != null) {
             sidebar.close();
         }
     }
 
-    public void onOrdersDataChanged()
-    {
+    public void onOrdersDataChanged() {
         showUpdatedOrder(tablePresenter.getTable(tableId));
     }
 
-    public void onTableOrdersSyncFailed(final Throwable t)
-    {
+    public void onTableOrdersSyncFailed(final Throwable t) {
     }
 
-    public void onTableOrdersSyncCompleted()
-    {
+    public void onTableOrdersSyncCompleted() {
     }
 
-    public void onBillPrintingError(final Throwable t)
-    {
+    public void onBillPrintingError(final Throwable t) {
 
     }
 
-    public void onBillPrinted()
-    {
+    public void onBillPrinted() {
 
     }
 
-    public void onPreorderSubmitFailed(final Throwable t)
-    {
+    public void onPreorderSubmitFailed(final Throwable t) {
         hideBlockingProgressDialog();
         showError(t);
     }
 
-    public void onPreorderSubmitted(final long serverTicketId)
-    {
+    public void onPreorderSubmitted(final long serverTicketId) {
         orderComments = null;
         hideBlockingProgressDialog();
 
-        if (tableId != 0)
-        {
+        if (tableId != 0) {
             setResult(RESULT_OK, new Intent());
             finish();
-        }
-        else
-        {
+        } else {
             onClearPreoderClick();
             Bundler.waitersSuccessOrderMessageActivity(serverTicketId).start(this);
         }
     }
 
     @Override
-    public void onSoldOutCheckResult(String message)
-    {
+    public void onSoldOutCheckResult(String message) {
         hideBlockingProgressDialog();
 
-        if (TextUtils.isEmpty(message))
-        {
+        if (TextUtils.isEmpty(message)) {
             askPaxWaiterAndFinishOrderSubmission();
-        }
-        else
-        {
+        } else {
             showMessage(message);
         }
     }
 
-    public void onTableMovementError(final Throwable t)
-    {
+    public void onTableMovementError(final Throwable t) {
         // unused here
     }
 
-    public void onTableMoved(final long ticketId, final long tableId)
-    {
+    public void onTableMoved(final long ticketId, final long tableId) {
         // unused here
     }
 }

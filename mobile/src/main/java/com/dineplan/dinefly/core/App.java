@@ -18,6 +18,7 @@ public class App extends BaseApp implements Application.ActivityLifecycleCallbac
     DataManager dataManager;
     Activity lastRegisteredActivity;
     int activitiesUp;
+    private static App instance;
 
     public static AppSettings getSettings()
     {
@@ -45,6 +46,7 @@ public class App extends BaseApp implements Application.ActivityLifecycleCallbac
 
         settings = new AppSettings(this);
         registerActivityLifecycleCallbacks(this);
+        instance = this;
     }
 
     private void initFonts()
@@ -55,7 +57,9 @@ public class App extends BaseApp implements Application.ActivityLifecycleCallbac
                                               .build()
                                      );
     }
-
+    public static App getInstance() {
+        return instance;
+    }
     public static DataManager getDataManager()
     {
         return ((App) getInstance()).dataManager;

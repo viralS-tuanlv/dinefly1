@@ -21,4 +21,9 @@
             android:title="@string/toggle_menu_mode"
             app:showAsAction="never"
             android:icon="@drawable/ic_apps_white_24dp" />
+    <item
+        android:id="@+id/menu_switch"
+        android:icon="@drawable/ic_apps_white_24dp"
+        android:title="@string/menu_vertical"
+        app:showAsAction="never" />
 </menu>
