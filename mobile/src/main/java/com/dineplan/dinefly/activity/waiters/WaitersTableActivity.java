@@ -94,6 +94,7 @@ public class WaitersTableActivity extends WaitersBaseActivity implements WaiterT
     @InjectPresenter
     WaiterOrderPresenter orderPresenter;
 
+    private long ticketId = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -149,7 +150,7 @@ public class WaitersTableActivity extends WaitersBaseActivity implements WaiterT
             guestsDurationTitle.setVisibility(View.INVISIBLE);
 
             btnFialize.setText("0.00");
-
+            ticketId = ticket.getDineplanOrderId();
             tableTitle.setText(ticket.getDineplanOrderId() != 0 ? getString(R.string.order_number_title, ticket.getDineplanOrderId()) : getString(R.string.new_unsynced_order));
             guestsCountTitle.setVisibility(ticket.getDineplanOrderId() != 0 ? View.VISIBLE : View.INVISIBLE);
             guestsCount.setVisibility(ticket.getDineplanOrderId() != 0 ? View.VISIBLE : View.INVISIBLE);
@@ -210,8 +211,6 @@ public class WaitersTableActivity extends WaitersBaseActivity implements WaiterT
                 finish();
             }
         });
-        final WaiterOrder ticket = orderPresenter.getOrderForTable(tableId);
-
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener()
         {
             public boolean onMenuItemClick(final MenuItem item)
@@ -222,7 +221,7 @@ public class WaitersTableActivity extends WaitersBaseActivity implements WaiterT
                         onMoveTable();
                         return true;
                         case R.id.menu_bill:
-                        new DialogPrint(WaitersTableActivity.this, ticket.getDineplanOrderId()).show();
+                        new DialogPrint(WaitersTableActivity.this, ticketId).show();
                         return true;
                 }
 
