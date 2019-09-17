@@ -144,8 +144,7 @@
     <string name="reprint_bill">Reprint Bill</string>
     <string name="order_reprinted">The bill was sent to the printer.</string>
     <string name="toggle_menu_mode">Toggle Display Mode</string>
-    <string name="menu_vertical">Vertical menu</string>
-    <string name="menu_horizontal">Horizontal menu</string>
+    <string name="menu_toggle">Toggle Category Menu</string>
     <string name="portion_custom_price">Specify Price</string>
     <string name="combo_group_min_fail" formatted="false">- For %s you must select at least %d items</string>
     <string name="combo_group_max_fail" formatted="false">- For %s you must select no more than %d items</string>

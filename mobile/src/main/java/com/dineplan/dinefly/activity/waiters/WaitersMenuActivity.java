@@ -56,9 +56,9 @@ import in.workarounds.bundler.annotations.Arg;
 import in.workarounds.bundler.annotations.RequireBundler;
 import in.workarounds.bundler.annotations.Required;
 
-import static com.dineplan.dinefly.util.SharedPrefs.HORIZONTAL;
+import static com.dineplan.dinefly.util.SharedPrefs.VISIBLE;
 import static com.dineplan.dinefly.util.SharedPrefs.MENU_TYPE;
-import static com.dineplan.dinefly.util.SharedPrefs.VERTICAL;
+import static com.dineplan.dinefly.util.SharedPrefs.GONE;
 
 /**
  * Created by dlivotov on 07/06/2016.
@@ -77,8 +77,8 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
     @BindView(R.id.waitersToolbar)
     Toolbar toolbar;
 
-    @BindView(R.id.waiterMenuCatsTabs)
-    @Nullable
+//    @BindView(R.id.waiterMenuCatsTabs)
+//    @Nullable
     CategoriesTabStripView catsTabsView;
 
     @BindView(R.id.waiterMenuCatsLIst)
@@ -153,22 +153,15 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
     }
 
     private void setUpMenu() {
-        final MenuItem itemChange = toolbar.getMenu().findItem(R.id.menu_switch);
         switch (SharedPrefs.getInstance().get(MENU_TYPE, String.class)) {
-            case HORIZONTAL:
-                catsTabsView.setVisibility(View.VISIBLE);
-                catsListView.setVisibility(View.GONE);
-                itemChange.setTitle(getString(R.string.menu_vertical));
-                break;
-            case VERTICAL:
-                catsTabsView.setVisibility(View.GONE);
+            case VISIBLE:
                 catsListView.setVisibility(View.VISIBLE);
-                itemChange.setTitle(getString(R.string.menu_horizontal));
+                break;
+            case GONE:
+                catsListView.setVisibility(View.GONE);
                 break;
             default:
-                catsTabsView.setVisibility(View.VISIBLE);
-                catsListView.setVisibility(View.GONE);
-                itemChange.setTitle(getString(R.string.menu_vertical));
+                catsListView.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -242,13 +235,10 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
     }
 
     private void setMenuView() {
-        final MenuItem itemChange = toolbar.getMenu().findItem(R.id.menu_switch);
-        if (SharedPrefs.getInstance().get(MENU_TYPE, String.class).equals(VERTICAL)) {
-            SharedPrefs.getInstance().put(MENU_TYPE, HORIZONTAL);
-            itemChange.setTitle(getString(R.string.menu_vertical));
+        if (SharedPrefs.getInstance().get(MENU_TYPE, String.class).equals(GONE)) {
+            SharedPrefs.getInstance().put(MENU_TYPE, VISIBLE);
         } else {
-            SharedPrefs.getInstance().put(MENU_TYPE, VERTICAL);
-            itemChange.setTitle(getString(R.string.menu_horizontal));
+            SharedPrefs.getInstance().put(MENU_TYPE, GONE);
         }
         setUpMenu();
     }

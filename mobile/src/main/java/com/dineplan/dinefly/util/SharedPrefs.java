@@ -10,8 +10,8 @@ public class SharedPrefs {
     private SharedPreferences mSharedPreferences;
     public static final String SHARED_PREFERENCE_NAME = "DineFly";
     public static final String MENU_TYPE = "MenuType";
-    public static final String HORIZONTAL = "horizontal";
-    public static final String VERTICAL = "vertical";
+    public static final String VISIBLE = "visible";
+    public static final String GONE = "gone";
     private SharedPrefs() {
         mSharedPreferences = App.getInstance().getSharedPreferences(SHARED_PREFERENCE_NAME, Context.MODE_PRIVATE);
     }
