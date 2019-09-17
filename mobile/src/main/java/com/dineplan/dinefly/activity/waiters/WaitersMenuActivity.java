@@ -158,17 +158,17 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
             case HORIZONTAL:
                 catsTabsView.setVisibility(View.VISIBLE);
                 catsListView.setVisibility(View.GONE);
-                itemChange.setTitle(getString(R.string.menu_horizontal));
+                itemChange.setTitle(getString(R.string.menu_vertical));
                 break;
             case VERTICAL:
                 catsTabsView.setVisibility(View.GONE);
                 catsListView.setVisibility(View.VISIBLE);
-                itemChange.setTitle(getString(R.string.menu_vertical));
+                itemChange.setTitle(getString(R.string.menu_horizontal));
                 break;
             default:
                 catsTabsView.setVisibility(View.VISIBLE);
                 catsListView.setVisibility(View.GONE);
-                itemChange.setTitle(getString(R.string.menu_horizontal));
+                itemChange.setTitle(getString(R.string.menu_vertical));
                 break;
         }
     }
@@ -245,10 +245,10 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
         final MenuItem itemChange = toolbar.getMenu().findItem(R.id.menu_switch);
         if (SharedPrefs.getInstance().get(MENU_TYPE, String.class).equals(VERTICAL)) {
             SharedPrefs.getInstance().put(MENU_TYPE, HORIZONTAL);
-            itemChange.setTitle(getString(R.string.menu_horizontal));
+            itemChange.setTitle(getString(R.string.menu_vertical));
         } else {
             SharedPrefs.getInstance().put(MENU_TYPE, VERTICAL);
-            itemChange.setTitle(getString(R.string.menu_vertical));
+            itemChange.setTitle(getString(R.string.menu_horizontal));
         }
         setUpMenu();
     }
