@@ -151,7 +151,7 @@ public class WaitersTableActivity extends WaitersBaseActivity implements WaiterT
 
             btnFialize.setText("0.00");
             ticketId = ticket.getDineplanOrderId();
-            tableTitle.setText(ticket.getDineplanOrderId() != 0 ? getString(R.string.order_number_title, ticket.getDineplanOrderId()) : getString(R.string.new_unsynced_order));
+            tableTitle.setText(getTicketNumber(ticket));
             guestsCountTitle.setVisibility(ticket.getDineplanOrderId() != 0 ? View.VISIBLE : View.INVISIBLE);
             guestsCount.setVisibility(ticket.getDineplanOrderId() != 0 ? View.VISIBLE : View.INVISIBLE);
             guestsWaiterTitle.setVisibility(ticket.getDineplanOrderId() != 0 ? View.VISIBLE : View.INVISIBLE);
@@ -175,6 +175,12 @@ public class WaitersTableActivity extends WaitersBaseActivity implements WaiterT
                 }
             }
         }
+    }
+    private String getTicketNumber(WaiterOrder ticket) {
+        if (ticket.getTicketNumber() != null) {
+            return getString(R.string.order_number_title_number, ticket.getTicketNumber());
+        }
+        return ticket.getDineplanOrderId() != 0 ? getString(R.string.order_number_title, ticket.getDineplanOrderId()) : getString(R.string.new_unsynced_order);
     }
 
     @OnClick({R.id.waiterTableGuestsTitle, R.id.waiterTableGuests, R.id.waiterTableWaiter, R.id.waiterTableWaiterTitle})

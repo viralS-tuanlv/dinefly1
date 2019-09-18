@@ -42,9 +42,18 @@ public class WaiterOrder
     String pax;
     String waiter;
     float serverComputedAmount;
+    String ticketNumber;
 
     public WaiterOrder()
     {
+    }
+
+    public String getTicketNumber() {
+        return ticketNumber;
+    }
+
+    public void setTicketNumber(String ticketNumber) {
+        this.ticketNumber = ticketNumber;
     }
 
     public long getId()

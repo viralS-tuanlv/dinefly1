@@ -62,6 +62,7 @@
     <string name="unconfirmed_preorders_on_menu_exit_warning">Please remove or submit selected food before leaving this screen.</string>
     <string name="new_unsynced_order">Unsynced New Ticket</string>
     <string name="order_number_title">Ticket %d</string>
+    <string name="order_number_title_number">Ticket %s</string>
     <string name="serve_now">Serve Now</string>
     <string name="sync_error">Dineplan Synchronisation Error</string>
     <string name="ticket_finalisation">Ticket Finalisation Options</string>

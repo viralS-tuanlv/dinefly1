@@ -122,4 +122,21 @@ public class DineplanTableSummary
 
         return false;
     }
+    public String getTicketNumber(final long id)
+    {
+        String ticketNumber = null;
+        if (tickets != null)
+        {
+            for (DineplanTicketInfo info : tickets)
+            {
+                if (id == info.getId())
+                {
+                    ticketNumber = info.getNumber();
+                }
+            }
+            return ticketNumber;
+        }
+
+        return null;
+    }
 }

@@ -75,6 +75,8 @@ public class DineplanTicket
     @SerializedName("isDineCall")
     boolean dineCall;
 
+    String ticketNumber;
+
 //    "transactions": null
 //    "entities": null,
 //    "calculations": [],
@@ -82,6 +84,14 @@ public class DineplanTicket
 
     public DineplanTicket()
     {
+    }
+
+    public String getTicketNumber() {
+        return ticketNumber;
+    }
+
+    public void setTicketNumber(String ticketNumber) {
+        this.ticketNumber = ticketNumber;
     }
 
     public int getId()

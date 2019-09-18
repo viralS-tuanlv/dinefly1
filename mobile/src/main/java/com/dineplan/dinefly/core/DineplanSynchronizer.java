@@ -258,6 +258,7 @@ public class DineplanSynchronizer
             ticket.setPax(serverTicket.getPax());
             ticket.setWaiter(serverTicket.getWaiter());
             ticket.setServerComputedAmount(serverTicket.getAmount());
+            ticket.setTicketNumber(serverTicket.getTicketNumber());
 
             for (DineplanTicketOrder order : serverTicket.getOrders())
             {
@@ -670,8 +671,9 @@ public class DineplanSynchronizer
                     {
                         return null;
                     }
-
-                    return dtr.getTicket();
+                    DineplanTicket dineplanTicket = dtr.getTicket();
+                    dineplanTicket.setTicketNumber(tableSummary.getTicketNumber(dineplanTicket.getId()));
+                    return dineplanTicket;
                 } else
                 {
                     throw new DineflyNetworkException(ticketResponse.code(), ticketResponse.message());
