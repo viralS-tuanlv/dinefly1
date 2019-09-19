@@ -148,7 +148,10 @@ public class WaitersMenuActivity extends WaitersBaseActivity implements WaiterTa
         if (!App.isTablet()) {
             setUpMenu();
         } else {
-            toolbar.getMenu().findItem(R.id.menu_switch).setVisible(false);
+            try {
+                toolbar.getMenu().findItem(R.id.menu_switch).setVisible(false);
+            }catch (Exception e) {
+            }
         }
     }
 
