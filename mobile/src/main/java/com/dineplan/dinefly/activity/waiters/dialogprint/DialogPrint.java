@@ -74,17 +74,17 @@ public class DialogPrint extends Dialog implements DialogPrintPresenter.View {
     @Override
     public void loadBillSuccess(List<String> content) {
         setCancelable(true);
-        btnClose.setVisibility(View.VISIBLE);
-        loading.setVisibility(View.GONE);
         err.setVisibility(View.GONE);
         List<String> newContent = new ArrayList<>();
         for (int i = 0; i < content.size(); i++) {
-            if (content.get(i).length() >= 4) {
+            if (content.get(i).length() >= 4 && !content.get(i).contains("<XCT>") && !content.get(i).contains("<DC>")) {
                 newContent.add(content.get(i).trim().replace("--C--", ""));
             }
         }
         adapterPrint = new AdapterPrint(newContent);
         list.setAdapter(adapterPrint);
+        btnClose.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.GONE);
     }
 }
 
