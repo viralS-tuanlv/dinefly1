@@ -34,9 +34,9 @@ public class DialogPrint extends Dialog implements DialogPrintPresenter.View {
         super(context);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.print_layout);
-        getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,
-                WindowManager.LayoutParams.MATCH_PARENT);
-        setCancelable(true);
+        getWindow().setLayout(WindowManager.LayoutParams.WRAP_CONTENT,
+                WindowManager.LayoutParams.WRAP_CONTENT);
+        setCancelable(false);
         initView(context, ticketId);
     }
 
@@ -59,10 +59,13 @@ public class DialogPrint extends Dialog implements DialogPrintPresenter.View {
     @Override
     public void onLoading() {
         loading.setVisibility(View.VISIBLE);
+        btnClose.setVisibility(View.GONE);
     }
 
     @Override
     public void onError(String msg) {
+        setCancelable(true);
+        btnClose.setVisibility(View.VISIBLE);
         err.setVisibility(View.VISIBLE);
         loading.setVisibility(View.GONE);
         err.setText(msg);
@@ -70,6 +73,8 @@ public class DialogPrint extends Dialog implements DialogPrintPresenter.View {
 
     @Override
     public void loadBillSuccess(List<String> content) {
+        setCancelable(true);
+        btnClose.setVisibility(View.VISIBLE);
         loading.setVisibility(View.GONE);
         err.setVisibility(View.GONE);
         List<String> newContent = new ArrayList<>();
@@ -80,13 +85,6 @@ public class DialogPrint extends Dialog implements DialogPrintPresenter.View {
         }
         adapterPrint = new AdapterPrint(newContent);
         list.setAdapter(adapterPrint);
-
-//        String contents = "";
-//        for (int i = 0; i < content.size(); i++) {
-//            contents = contents.concat(content.get(i));
-//        }
-//        successText.setText(contents.replace("!", ""));
-
     }
 }
 
